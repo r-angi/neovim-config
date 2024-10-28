@@ -1,7 +1,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 require 'core.keymaps'
 require 'core.settings'
@@ -17,7 +17,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
 
 local lazyOpts = {
   ui = {
@@ -39,4 +38,3 @@ local lazyOpts = {
   },
 }
 require('lazy').setup('plugins', lazyOpts)
-
