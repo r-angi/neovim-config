@@ -188,14 +188,23 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         gopls = {},
-        pyright = {},
-        ruff = {
-          init_options = {
-            settings = {
-              configuration = '~/.config/ruff/pyproject.toml',
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = 'off', --  Let mypy handle type checking
+              },
             },
           },
         },
+        mypy = {},
+        ruff = {
+          settings = {
+            organizeImports = true,
+          },
+        },
+        ts_ls = {},
+        eslint = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -222,6 +231,9 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'prettier', -- Used to format TypeScript/JavaScript
+        'typescript-language-server', -- TypeScript LSP
+        'eslint-lsp', -- ESLint LSP
       })
       require('mason-tool-installer').setup {
         ensure_installed = ensure_installed,
