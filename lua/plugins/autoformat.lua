@@ -39,8 +39,12 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      python = { 'isort', 'black' },
+      python = { 'ruff' },
       go = { 'goimports', 'gofmt' },
+      typescript = { 'prettier' },
+      javascript = { 'prettier' },
+      typescriptreact = { 'prettier' },
+      javascriptreact = { 'prettier' },
       html = { 'prettier' },
       json = { 'prettier' },
       yaml = { 'prettier' },
