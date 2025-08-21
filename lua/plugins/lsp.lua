@@ -162,9 +162,7 @@ return {
           -- This may be unwanted, since they displace some of your code
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {
-                bufnr = event.buf,
-              })
+              vim.lsp.inlay_hint.enable(event.buf, not vim.lsp.inlay_hint.is_enabled(event.buf))
             end, '[T]oggle Inlay [H]ints')
           end
         end,
@@ -197,10 +195,18 @@ return {
             },
           },
         },
-        mypy = {},
         ruff = {
           settings = {
             organizeImports = true,
+          },
+        },
+        mypy = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = 'strict',
+              },
+            },
           },
         },
         ts_ls = {},
@@ -234,6 +240,7 @@ return {
         'prettier', -- Used to format TypeScript/JavaScript
         'typescript-language-server', -- TypeScript LSP
         'eslint-lsp', -- ESLint LSP
+        'mypy', -- Python type checker
       })
       require('mason-tool-installer').setup {
         ensure_installed = ensure_installed,
