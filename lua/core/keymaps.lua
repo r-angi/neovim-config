@@ -29,3 +29,16 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Motion remapping: Replace hard-to-type % with easier m
+-- Jump to matching pair (preserves m for marks via mm)
+vim.keymap.set('n', 'mm', '%', { desc = 'Jump to [M]atching pair' })
+
+-- Select until matching pair in visual mode
+vim.keymap.set('x', 'm', '%', { desc = 'Select until [M]atching pair' })
+
+-- Use with operators (dm, cm, ym, etc.)
+vim.keymap.set('o', 'm', '%', { desc = 'Operate until [M]atching pair' })
+
+-- Visual select to end of entire block
+vim.keymap.set('n', 'M', 'v%', { desc = 'Visual select [M]atching block' })

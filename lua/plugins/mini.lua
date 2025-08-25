@@ -8,7 +8,16 @@ return {
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      require('mini.ai').setup { 
+        n_lines = 500,
+        custom_textobjects = {
+          -- Matching pairs textobject (works with yim, dim, cim, etc.)
+          m = {
+            { "%b()", "%b[]", "%b{}" },
+            "^.().*().$",
+          }
+        }
+      }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
