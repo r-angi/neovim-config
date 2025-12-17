@@ -209,8 +209,7 @@ return {
             },
           },
         },
-        ts_ls = {},
-        eslint = {},
+        tsgo = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -237,9 +236,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'prettier', -- Used to format TypeScript/JavaScript
-        'typescript-language-server', -- TypeScript LSP
-        'eslint-lsp', -- ESLint LSP
+        'biome', -- Used to format and lint TypeScript/JavaScript
         'mypy', -- Python type checker
       })
       require('mason-tool-installer').setup {
