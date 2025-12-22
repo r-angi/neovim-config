@@ -61,6 +61,16 @@ vim.opt.scrolloff = 10
 vim.opt.swapfile = false
 vim.opt.textwidth = 120
 vim.opt.colorcolumn = '120'
+
+-- Configure diagnostic display
+vim.diagnostic.config({
+  underline = true,
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+  severity_sort = true,
+})
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
