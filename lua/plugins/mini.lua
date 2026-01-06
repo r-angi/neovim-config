@@ -41,6 +41,48 @@ return {
         return '%2l:%-2v'
       end
 
+      -- Add custom diagnostics section to show errors/warnings
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_diagnostics = function()
+        local diagnostics = vim.diagnostic.get(0) -- Get diagnostics for current buffer
+        local errors = 0
+        local warnings = 0
+        local hints = 0
+        local info = 0
+
+        for _, diagnostic in ipairs(diagnostics) do
+          if diagnostic.severity == vim.diagnostic.severity.ERROR then
+            errors = errors + 1
+          elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+            warnings = warnings + 1
+          elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+            hints = hints + 1
+          elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+            info = info + 1
+          end
+        end
+
+        local parts = {}
+        if errors > 0 then
+          table.insert(parts, string.format('%%#DiagnosticError#E:%d%%*', errors))
+        end
+        if warnings > 0 then
+          table.insert(parts, string.format('%%#DiagnosticWarn#W:%d%%*', warnings))
+        end
+        if hints > 0 then
+          table.insert(parts, string.format('%%#DiagnosticHint#H:%d%%*', hints))
+        end
+        if info > 0 then
+          table.insert(parts, string.format('%%#DiagnosticInfo#I:%d%%*', info))
+        end
+
+        if #parts > 0 then
+          return table.concat(parts, ' ')
+        else
+          return ''
+        end
+      end
+
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,

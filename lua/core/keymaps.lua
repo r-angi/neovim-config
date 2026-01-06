@@ -12,13 +12,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>dy', function()
+vim.keymap.set('n', '<leader>yd', function()
   local diagnostics = vim.diagnostic.get(0, { lnum = vim.fn.line('.') - 1 })
   if #diagnostics > 0 then
     vim.fn.setreg('+', diagnostics[1].message)
     print('Diagnostic copied to clipboard')
   end
-end, { desc = '[D]iagnostic [Y]ank to clipboard' })
+end, { desc = '[Y]ank [D]iagnostic to clipboard' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -49,3 +49,25 @@ vim.keymap.set('o', 'm', '%', { desc = 'Operate until [M]atching pair' })
 
 -- Visual select to end of entire block
 vim.keymap.set('n', 'M', 'v%', { desc = 'Visual select [M]atching block' })
+
+-- Window management: vertical split with auto-focus
+vim.keymap.set('n', '<leader>|', '<C-w>v', { desc = 'Split window vertically' })
+
+-- Yank (copy) filename keymaps
+vim.keymap.set('n', '<leader>yf', function()
+  local path = vim.fn.expand('%')
+  vim.fn.setreg('+', path)
+  print('Copied relative path: ' .. path)
+end, { desc = '[Y]ank relative [F]ilename' })
+
+vim.keymap.set('n', '<leader>yF', function()
+  local path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', path)
+  print('Copied absolute path: ' .. path)
+end, { desc = '[Y]ank absolute path ([F]ull)' })
+
+vim.keymap.set('n', '<leader>yn', function()
+  local name = vim.fn.expand('%:t')
+  vim.fn.setreg('+', name)
+  print('Copied filename: ' .. name)
+end, { desc = '[Y]ank file[N]ame only' })
