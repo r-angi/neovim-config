@@ -209,7 +209,10 @@ return {
             },
           },
         },
-        tsgo = {},
+        tsgo = {
+          cmd = { vim.fn.stdpath('data') .. '/mason/bin/tsgo', '--lsp', '--stdio' },
+        },
+        biome = {}, -- Linting diagnostics for JS/TS (Prettier handles formatting)
         lua_ls = {
           settings = {
             Lua = {

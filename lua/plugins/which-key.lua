@@ -67,6 +67,9 @@ return {
         }, {
             '<leader>y',
             group = '[Y]ank'
+        }, {
+            '<leader>x',
+            group = 'Conflicts'
         }}
     }
 }
