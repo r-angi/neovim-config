@@ -1,3 +1,5 @@
+vim.g.python3_host_prog = vim.fn.expand('~/.pyenv/versions/3.12.4/bin/python3')
+
 -- See `:help vim.opt`
 
 -- Make line numbers default

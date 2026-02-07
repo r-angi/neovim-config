@@ -70,6 +70,9 @@ return {
         }, {
             '<leader>x',
             group = 'Conflicts'
+        }, {
+            '<leader>m',
+            group = '[M]olten/Jupyter'
         }}
     }
 }

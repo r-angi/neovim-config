@@ -8,16 +8,32 @@ return {
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { 
+      require('mini.ai').setup {
         n_lines = 500,
         custom_textobjects = {
           -- Matching pairs textobject (works with yim, dim, cim, etc.)
           m = {
             { "%b()", "%b[]", "%b{}" },
             "^.().*().$",
-          }
+          },
+          -- Jupyter cell textobject (ih = inner cell, ah = around cell including marker)
+          h = function(...)
+            local ok, nn = pcall(require, 'notebook-navigator')
+            if ok then return nn.miniai_spec(...) end
+          end,
         }
       }
+
+      -- Highlight # %% cell markers in Python files
+      local hipatterns = require('mini.hipatterns')
+      hipatterns.setup({
+        highlighters = {
+          cell_marker = {
+            pattern = '^# %%%%.*',
+            group = 'MiniHipatternsNote',
+          },
+        },
+      })
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
