@@ -200,15 +200,6 @@ return {
             organizeImports = true,
           },
         },
-        mypy = {
-          settings = {
-            python = {
-              analysis = {
-                typeCheckingMode = 'strict',
-              },
-            },
-          },
-        },
         tsgo = {
           cmd = { vim.fn.stdpath('data') .. '/mason/bin/tsgo', '--lsp', '--stdio' },
         },

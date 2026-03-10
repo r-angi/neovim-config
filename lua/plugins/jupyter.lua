@@ -83,12 +83,15 @@ return {
   {
     'benlubas/molten-nvim',
     version = '^1.0.0',
+    dependencies = {
+      '3rd/image.nvim',
+    },
     build = function()
       vim.cmd(':UpdateRemotePlugins')
       patch_molten_server_api()
     end,
     init = function()
-      vim.g.molten_image_provider = 'none'
+      vim.g.molten_image_provider = 'image.nvim'
       vim.g.molten_auto_open_output = true
       vim.g.molten_open_cmd = 'open'
       vim.g.molten_output_win_max_height = 20
@@ -136,6 +139,16 @@ return {
     end,
   },
 
+  -- Inline image rendering (uses kitty graphics protocol, supported by Ghostty)
+  {
+    '3rd/image.nvim',
+    opts = {
+      backend = 'kitty',
+      processor = 'magick_rock',
+      tmux_show_only_in_active_window = true,
+    },
+  },
+
   -- NotebookNavigator - cell detection, navigation, and execution for # %% files
   {
     'GCBallesteros/NotebookNavigator.nvim',
@@ -153,9 +166,9 @@ return {
       vim.keymap.set('n', '<leader>mc', function() nn.run_cell() end, { desc = 'Molten: Run cell' })
       vim.keymap.set('n', '<leader>mr', function() nn.run_and_move() end, { desc = 'Molten: Run cell & move' })
 
-      -- Cell navigation
-      vim.keymap.set('n', ']c', function() nn.move_cell('d') end, { desc = 'Next cell' })
-      vim.keymap.set('n', '[c', function() nn.move_cell('u') end, { desc = 'Previous cell' })
+      -- Cell navigation (using ]h/[h to avoid conflict with gitsigns ]c/[c)
+      vim.keymap.set('n', ']h', function() nn.move_cell('d') end, { desc = 'Next cell' })
+      vim.keymap.set('n', '[h', function() nn.move_cell('u') end, { desc = 'Previous cell' })
     end,
   },
 }

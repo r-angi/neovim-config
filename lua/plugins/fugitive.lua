@@ -24,7 +24,7 @@ return {
     { '<leader>gc', '<cmd>Git commit<cr>', desc = 'Git commit' },
     { '<leader>gp', '<cmd>Git push<cr>', desc = 'Git push' },
     { '<leader>gP', '<cmd>Git pull<cr>', desc = 'Git pull' },
-    { '<leader>gb', '<cmd>Git blame<cr>', desc = 'Git blame' },
+    { '<leader>gB', '<cmd>Git blame<cr>', desc = 'Git blame (full)' },
     { '<leader>gL', '<cmd>Git log<cr>', desc = 'Git log' },
     { '<leader>gf', '<cmd>Git fetch<cr>', desc = 'Git fetch' },
     { '<leader>go', '<cmd>GBrowse<cr>', desc = 'Open in GitHub' },
