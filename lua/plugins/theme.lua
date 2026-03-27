@@ -1,11 +1,26 @@
+-- Previous theme (tokyonight-night):
+-- return {
+--     'folke/tokyonight.nvim',
+--     priority = 1000,
+--     init = function()
+--         vim.cmd.colorscheme 'tokyonight-night'
+--         vim.cmd.hi 'Comment gui=none'
+--     end
+-- }
+
+-- Use tokyonight with transparent background to match Ghostty
 return {
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    priority = 1000,
     init = function()
-        -- Other styles: 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+        require('tokyonight').setup({
+            transparent = true,
+            styles = {
+                sidebars = "transparent",
+                floats = "transparent",
+            },
+        })
         vim.cmd.colorscheme 'tokyonight-night'
-        -- You can configure highlights by doing something like:
         vim.cmd.hi 'Comment gui=none'
-    end
+    end,
 }
